@@ -1,0 +1,21 @@
+{{ form_start(destinationForm) }}
+    {{ form_row(destinationForm.destination) }}
+    {{ form_row(destinationForm.description) }}
+    {{ form_row(destinationForm.price) }}
+    {{ form_row(destinationForm.duration) }}
+   
+
+    {# On affiche les images si on est en édition #}
+    {% if app.request.attributes.get('_route') == 'admin_destinations_edit' %}
+        <h2>Images</h2>
+        {% for image in destination.images %}
+            <div>
+                <img src="{{ asset('assets/uploads/destinations/mini/300x300-' ~ destination.images[0].name ) }}" alt="Image" width="150">
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    {{ form_row(destinationForm.images) }}
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(destinationForm) }}
